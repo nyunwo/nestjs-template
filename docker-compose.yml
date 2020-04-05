@@ -6,19 +6,20 @@ services:
     environment:
       NODE_ENV: "development"
     deploy:
-      resources:
-        limits:
-          memory: 1000M
-      restart_policy:
-        condition: on-failure
+      #resources:
+      #  limits:
+      #    memory: 1000M
+      #restart_policy:
+      #  condition: on-failure
     ports:
-      - "3000:3000"
-    #networks:
-    #  - code-push-net
-    network_mode: host
-    #volumes:
-    #  - data-nest:/app
+      - "3002:3002"
+    networks:
+      - nest-tpl
+    #network_mode: host
+    volumes:
+      - ./:/app
 
-#networks:
+networks:
+   nest-tpl:
 #volumes:
 #  data-nest:

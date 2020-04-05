@@ -6,20 +6,56 @@ services:
     environment:
       NODE_ENV: "development"
     deploy:
-      #resources:
-      #  limits:
-      #    memory: 1000M
-      #restart_policy:
-      #  condition: on-failure
+      resources:
+       limits:
+         memory: 1000M
+      restart_policy:
+       condition: on-failure
     ports:
       - "3002:3002"
-    networks:
-      - nest-tpl
-    #network_mode: host
     volumes:
       - ./:/app
+    depends_on:
+      - db
+      - redis
 
-networks:
-   nest-tpl:
-#volumes:
-#  data-nest:
+  db:
+    container_name: postgres
+    image: postgres:12-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: "nesttpl"
+      POSTGRES_PASSWORD: "7895432dB" #密码
+      PGDATA: "/var/lib/postgresql/data/pgdata" #数据存储文件夹
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - data-postgres:/var/lib/postgresql/data/pgdata
+      #- ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    container_name: redis
+    image: redis:5-alpine
+    volumes:
+      - data-redis:/data
+    ports:
+      - "6388:6379"
+
+  hasura:
+    container_name: hasura
+    image: hasura/graphql-engine:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:7895432dB@db:5432/nesttpl
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: "himyhasura"
+
+volumes:
+  data-postgres:
+  data-redis:

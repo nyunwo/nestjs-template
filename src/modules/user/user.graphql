@@ -1,5 +1,9 @@
 type Query {
-    getUser: User
+    getUser(id: Int): User
+}
+
+type Mutation {
+    addUser(userData: UserInput): User
 }
 
 type User {
@@ -7,4 +11,9 @@ type User {
   password: String
   salt: String
   username: String!
+}
+
+input UserInput{
+  username: String!
+  password: String
 }

@@ -8,12 +8,12 @@ import { GraphQLSchema } from 'graphql'
 import { setContext } from 'apollo-link-context'
 import { HttpLink } from 'apollo-link-http'
 const fetch = require('node-fetch')
-//import { ConfigService } from 'src/config/config.service'
+import { ConfigService } from 'src/config/config.service'
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
     constructor(
-        //private readonly configService: ConfigService
+        private readonly configService: ConfigService
     ) { }
 
     async createGqlOptions(): Promise<GqlModuleOptions> {
@@ -37,13 +37,13 @@ export class GqlConfigService implements GqlOptionsFactory {
     // 通过Uri获取Hasura的远程Schema
     private async getRemoteSchema(): Promise<GraphQLSchema> {
         const http = new HttpLink({
-            uri: 'http://127.0.0.1:8080/v1/graphql',//this.configService.get('HASURA_URI'),
+            uri: this.configService.get('HASURA_URI'),
             fetch
         })
 
         const link = setContext((request, previousContext) => ({
             headers: {
-                'X-Hasura-Admin-Secret': 'himyhasura'//this.configService.get('HASURA_ADMIN_SECRET')
+                'X-Hasura-Admin-Secret': this.configService.get('HASURA_ADMIN_SECRET')
                 //'Authentication': `Bearer ${previousContext.graphqlContext.authKey}`,
             }
         })).concat(http);

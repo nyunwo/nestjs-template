@@ -13,4 +13,13 @@ export class Person {
 
 export abstract class IQuery {
     abstract say(): Person | Promise<Person>;
+
+    abstract getUser(): User | Promise<User>;
+}
+
+export class User {
+    id: number;
+    password?: string;
+    salt?: string;
+    username: string;
 }

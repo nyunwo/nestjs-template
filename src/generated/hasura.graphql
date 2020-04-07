@@ -1,0 +1,713 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+type mutation_root {
+  delete_role(where: role_bool_exp!): role_mutation_response
+  delete_user(where: user_bool_exp!): user_mutation_response
+  delete_user_role(where: user_role_bool_exp!): user_role_mutation_response
+  insert_role(objects: [role_insert_input!]!, on_conflict: role_on_conflict): role_mutation_response
+  insert_user(objects: [user_insert_input!]!, on_conflict: user_on_conflict): user_mutation_response
+  insert_user_role(objects: [user_role_insert_input!]!, on_conflict: user_role_on_conflict): user_role_mutation_response
+  update_role(_inc: role_inc_input, _set: role_set_input, where: role_bool_exp!): role_mutation_response
+  update_user(_inc: user_inc_input, _set: user_set_input, where: user_bool_exp!): user_mutation_response
+  update_user_role(_inc: user_role_inc_input, _set: user_role_set_input, where: user_role_bool_exp!): user_role_mutation_response
+}
+
+enum order_by {
+  asc
+  asc_nulls_first
+  asc_nulls_last
+  desc
+  desc_nulls_first
+  desc_nulls_last
+}
+
+type query_root {
+  role(distinct_on: [role_select_column!], limit: Int, offset: Int, order_by: [role_order_by!], where: role_bool_exp): [role!]!
+  role_aggregate(distinct_on: [role_select_column!], limit: Int, offset: Int, order_by: [role_order_by!], where: role_bool_exp): role_aggregate!
+  role_by_pk(id: Int!): role
+  user(distinct_on: [user_select_column!], limit: Int, offset: Int, order_by: [user_order_by!], where: user_bool_exp): [user!]!
+  user_aggregate(distinct_on: [user_select_column!], limit: Int, offset: Int, order_by: [user_order_by!], where: user_bool_exp): user_aggregate!
+  user_by_pk(id: Int!): user
+  user_role(distinct_on: [user_role_select_column!], limit: Int, offset: Int, order_by: [user_role_order_by!], where: user_role_bool_exp): [user_role!]!
+  user_role_aggregate(distinct_on: [user_role_select_column!], limit: Int, offset: Int, order_by: [user_role_order_by!], where: user_role_bool_exp): user_role_aggregate!
+  user_role_by_pk(id: Int!): user_role
+}
+
+type role {
+  id: Int!
+  name: String!
+}
+
+type role_aggregate {
+  aggregate: role_aggregate_fields
+  nodes: [role!]!
+}
+
+type role_aggregate_fields {
+  avg: role_avg_fields
+  count(columns: [role_select_column!], distinct: Boolean): Int
+  max: role_max_fields
+  min: role_min_fields
+  stddev: role_stddev_fields
+  stddev_pop: role_stddev_pop_fields
+  stddev_samp: role_stddev_samp_fields
+  sum: role_sum_fields
+  var_pop: role_var_pop_fields
+  var_samp: role_var_samp_fields
+  variance: role_variance_fields
+}
+
+input role_aggregate_order_by {
+  avg: role_avg_order_by
+  count: order_by
+  max: role_max_order_by
+  min: role_min_order_by
+  stddev: role_stddev_order_by
+  stddev_pop: role_stddev_pop_order_by
+  stddev_samp: role_stddev_samp_order_by
+  sum: role_sum_order_by
+  var_pop: role_var_pop_order_by
+  var_samp: role_var_samp_order_by
+  variance: role_variance_order_by
+}
+
+input role_arr_rel_insert_input {
+  data: [role_insert_input!]!
+  on_conflict: role_on_conflict
+}
+
+type role_avg_fields {
+  id: Float
+}
+
+input role_avg_order_by {
+  id: order_by
+}
+
+input role_bool_exp {
+  _and: [role_bool_exp]
+  _not: role_bool_exp
+  _or: [role_bool_exp]
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+enum role_constraint {
+  role_name_key
+  role_pkey
+}
+
+input role_inc_input {
+  id: Int
+}
+
+input role_insert_input {
+  id: Int
+  name: String
+}
+
+type role_max_fields {
+  id: Int
+  name: String
+}
+
+input role_max_order_by {
+  id: order_by
+  name: order_by
+}
+
+type role_min_fields {
+  id: Int
+  name: String
+}
+
+input role_min_order_by {
+  id: order_by
+  name: order_by
+}
+
+type role_mutation_response {
+  affected_rows: Int!
+  returning: [role!]!
+}
+
+input role_obj_rel_insert_input {
+  data: role_insert_input!
+  on_conflict: role_on_conflict
+}
+
+input role_on_conflict {
+  constraint: role_constraint!
+  update_columns: [role_update_column!]!
+  where: role_bool_exp
+}
+
+input role_order_by {
+  id: order_by
+  name: order_by
+}
+
+enum role_select_column {
+  id
+  name
+}
+
+input role_set_input {
+  id: Int
+  name: String
+}
+
+type role_stddev_fields {
+  id: Float
+}
+
+input role_stddev_order_by {
+  id: order_by
+}
+
+type role_stddev_pop_fields {
+  id: Float
+}
+
+input role_stddev_pop_order_by {
+  id: order_by
+}
+
+type role_stddev_samp_fields {
+  id: Float
+}
+
+input role_stddev_samp_order_by {
+  id: order_by
+}
+
+type role_sum_fields {
+  id: Int
+}
+
+input role_sum_order_by {
+  id: order_by
+}
+
+enum role_update_column {
+  id
+  name
+}
+
+type role_var_pop_fields {
+  id: Float
+}
+
+input role_var_pop_order_by {
+  id: order_by
+}
+
+type role_var_samp_fields {
+  id: Float
+}
+
+input role_var_samp_order_by {
+  id: order_by
+}
+
+type role_variance_fields {
+  id: Float
+}
+
+input role_variance_order_by {
+  id: order_by
+}
+
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+type subscription_root {
+  role(distinct_on: [role_select_column!], limit: Int, offset: Int, order_by: [role_order_by!], where: role_bool_exp): [role!]!
+  role_aggregate(distinct_on: [role_select_column!], limit: Int, offset: Int, order_by: [role_order_by!], where: role_bool_exp): role_aggregate!
+  role_by_pk(id: Int!): role
+  user(distinct_on: [user_select_column!], limit: Int, offset: Int, order_by: [user_order_by!], where: user_bool_exp): [user!]!
+  user_aggregate(distinct_on: [user_select_column!], limit: Int, offset: Int, order_by: [user_order_by!], where: user_bool_exp): user_aggregate!
+  user_by_pk(id: Int!): user
+  user_role(distinct_on: [user_role_select_column!], limit: Int, offset: Int, order_by: [user_role_order_by!], where: user_role_bool_exp): [user_role!]!
+  user_role_aggregate(distinct_on: [user_role_select_column!], limit: Int, offset: Int, order_by: [user_role_order_by!], where: user_role_bool_exp): user_role_aggregate!
+  user_role_by_pk(id: Int!): user_role
+}
+
+type user {
+  id: Int!
+  password: String
+  salt: String
+  user_role: user_role
+  username: String!
+}
+
+type user_aggregate {
+  aggregate: user_aggregate_fields
+  nodes: [user!]!
+}
+
+type user_aggregate_fields {
+  avg: user_avg_fields
+  count(columns: [user_select_column!], distinct: Boolean): Int
+  max: user_max_fields
+  min: user_min_fields
+  stddev: user_stddev_fields
+  stddev_pop: user_stddev_pop_fields
+  stddev_samp: user_stddev_samp_fields
+  sum: user_sum_fields
+  var_pop: user_var_pop_fields
+  var_samp: user_var_samp_fields
+  variance: user_variance_fields
+}
+
+input user_aggregate_order_by {
+  avg: user_avg_order_by
+  count: order_by
+  max: user_max_order_by
+  min: user_min_order_by
+  stddev: user_stddev_order_by
+  stddev_pop: user_stddev_pop_order_by
+  stddev_samp: user_stddev_samp_order_by
+  sum: user_sum_order_by
+  var_pop: user_var_pop_order_by
+  var_samp: user_var_samp_order_by
+  variance: user_variance_order_by
+}
+
+input user_arr_rel_insert_input {
+  data: [user_insert_input!]!
+  on_conflict: user_on_conflict
+}
+
+type user_avg_fields {
+  id: Float
+}
+
+input user_avg_order_by {
+  id: order_by
+}
+
+input user_bool_exp {
+  _and: [user_bool_exp]
+  _not: user_bool_exp
+  _or: [user_bool_exp]
+  id: Int_comparison_exp
+  password: String_comparison_exp
+  salt: String_comparison_exp
+  user_role: user_role_bool_exp
+  username: String_comparison_exp
+}
+
+enum user_constraint {
+  user_pkey
+}
+
+input user_inc_input {
+  id: Int
+}
+
+input user_insert_input {
+  id: Int
+  password: String
+  salt: String
+  user_role: user_role_obj_rel_insert_input
+  username: String
+}
+
+type user_max_fields {
+  id: Int
+  password: String
+  salt: String
+  username: String
+}
+
+input user_max_order_by {
+  id: order_by
+  password: order_by
+  salt: order_by
+  username: order_by
+}
+
+type user_min_fields {
+  id: Int
+  password: String
+  salt: String
+  username: String
+}
+
+input user_min_order_by {
+  id: order_by
+  password: order_by
+  salt: order_by
+  username: order_by
+}
+
+type user_mutation_response {
+  affected_rows: Int!
+  returning: [user!]!
+}
+
+input user_obj_rel_insert_input {
+  data: user_insert_input!
+  on_conflict: user_on_conflict
+}
+
+input user_on_conflict {
+  constraint: user_constraint!
+  update_columns: [user_update_column!]!
+  where: user_bool_exp
+}
+
+input user_order_by {
+  id: order_by
+  password: order_by
+  salt: order_by
+  user_role: user_role_order_by
+  username: order_by
+}
+
+type user_role {
+  id: Int!
+  role: role!
+  role_id: Int!
+  user: user!
+  user_id: Int!
+}
+
+type user_role_aggregate {
+  aggregate: user_role_aggregate_fields
+  nodes: [user_role!]!
+}
+
+type user_role_aggregate_fields {
+  avg: user_role_avg_fields
+  count(columns: [user_role_select_column!], distinct: Boolean): Int
+  max: user_role_max_fields
+  min: user_role_min_fields
+  stddev: user_role_stddev_fields
+  stddev_pop: user_role_stddev_pop_fields
+  stddev_samp: user_role_stddev_samp_fields
+  sum: user_role_sum_fields
+  var_pop: user_role_var_pop_fields
+  var_samp: user_role_var_samp_fields
+  variance: user_role_variance_fields
+}
+
+input user_role_aggregate_order_by {
+  avg: user_role_avg_order_by
+  count: order_by
+  max: user_role_max_order_by
+  min: user_role_min_order_by
+  stddev: user_role_stddev_order_by
+  stddev_pop: user_role_stddev_pop_order_by
+  stddev_samp: user_role_stddev_samp_order_by
+  sum: user_role_sum_order_by
+  var_pop: user_role_var_pop_order_by
+  var_samp: user_role_var_samp_order_by
+  variance: user_role_variance_order_by
+}
+
+input user_role_arr_rel_insert_input {
+  data: [user_role_insert_input!]!
+  on_conflict: user_role_on_conflict
+}
+
+type user_role_avg_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_avg_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+input user_role_bool_exp {
+  _and: [user_role_bool_exp]
+  _not: user_role_bool_exp
+  _or: [user_role_bool_exp]
+  id: Int_comparison_exp
+  role: role_bool_exp
+  role_id: Int_comparison_exp
+  user: user_bool_exp
+  user_id: Int_comparison_exp
+}
+
+enum user_role_constraint {
+  user_role_pkey
+  user_role_user_id_role_id_key
+}
+
+input user_role_inc_input {
+  id: Int
+  role_id: Int
+  user_id: Int
+}
+
+input user_role_insert_input {
+  id: Int
+  role: role_obj_rel_insert_input
+  role_id: Int
+  user: user_obj_rel_insert_input
+  user_id: Int
+}
+
+type user_role_max_fields {
+  id: Int
+  role_id: Int
+  user_id: Int
+}
+
+input user_role_max_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_min_fields {
+  id: Int
+  role_id: Int
+  user_id: Int
+}
+
+input user_role_min_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_mutation_response {
+  affected_rows: Int!
+  returning: [user_role!]!
+}
+
+input user_role_obj_rel_insert_input {
+  data: user_role_insert_input!
+  on_conflict: user_role_on_conflict
+}
+
+input user_role_on_conflict {
+  constraint: user_role_constraint!
+  update_columns: [user_role_update_column!]!
+  where: user_role_bool_exp
+}
+
+input user_role_order_by {
+  id: order_by
+  role: role_order_by
+  role_id: order_by
+  user: user_order_by
+  user_id: order_by
+}
+
+enum user_role_select_column {
+  id
+  role_id
+  user_id
+}
+
+input user_role_set_input {
+  id: Int
+  role_id: Int
+  user_id: Int
+}
+
+type user_role_stddev_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_stddev_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_stddev_pop_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_stddev_pop_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_stddev_samp_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_stddev_samp_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_sum_fields {
+  id: Int
+  role_id: Int
+  user_id: Int
+}
+
+input user_role_sum_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+enum user_role_update_column {
+  id
+  role_id
+  user_id
+}
+
+type user_role_var_pop_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_var_pop_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_var_samp_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_var_samp_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+type user_role_variance_fields {
+  id: Float
+  role_id: Float
+  user_id: Float
+}
+
+input user_role_variance_order_by {
+  id: order_by
+  role_id: order_by
+  user_id: order_by
+}
+
+enum user_select_column {
+  id
+  password
+  salt
+  username
+}
+
+input user_set_input {
+  id: Int
+  password: String
+  salt: String
+  username: String
+}
+
+type user_stddev_fields {
+  id: Float
+}
+
+input user_stddev_order_by {
+  id: order_by
+}
+
+type user_stddev_pop_fields {
+  id: Float
+}
+
+input user_stddev_pop_order_by {
+  id: order_by
+}
+
+type user_stddev_samp_fields {
+  id: Float
+}
+
+input user_stddev_samp_order_by {
+  id: order_by
+}
+
+type user_sum_fields {
+  id: Int
+}
+
+input user_sum_order_by {
+  id: order_by
+}
+
+enum user_update_column {
+  id
+  password
+  salt
+  username
+}
+
+type user_var_pop_fields {
+  id: Float
+}
+
+input user_var_pop_order_by {
+  id: order_by
+}
+
+type user_var_samp_fields {
+  id: Float
+}
+
+input user_var_samp_order_by {
+  id: order_by
+}
+
+type user_variance_fields {
+  id: Float
+}
+
+input user_variance_order_by {
+  id: order_by
+}

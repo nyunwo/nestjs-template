@@ -1,0 +1,19 @@
+overwrite: true
+schema:
+  - http://127.0.0.1:8080/v1/graphql:
+      headers:
+        x-hasura-admin-secret: himyhasura
+        content-type: application/json
+documents: null
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+      - "typescript-document-nodes"
+  # ./graphql.schema.json:
+  #   plugins:
+  #     - "introspection"
+  src/generated/hasura.graphql:
+    plugins:
+      - schema-ast

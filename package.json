@@ -19,8 +19,8 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "gen-schema": "graphql-codegen --config ./src/graphql/codegen.yml",
-        "gen": "ts-node src/generated/generate.typings.ts"
+        "gen-all": "graphql-codegen --config ./src/graphql/codegen.hasura.yml && graphql-codegen --config ./src/graphql/codegen.yml",
+        "gen-quick": "graphql-codegen --config ./src/graphql/codegen.yml"
     },
     "dependencies": {
         "@nestjs/common": "^7.0.0",
@@ -61,7 +61,8 @@
         "@graphql-codegen/cli": "^1.8.3",
         "@graphql-codegen/typescript-resolvers": "^1.8.3",
         "@graphql-codegen/schema-ast": "^1.8.3",
-        "@graphql-codegen/typescript-document-nodes": "^1.8.3"
+        "@graphql-codegen/typescript-document-nodes": "^1.8.3",
+        "@graphql-codegen/typescript-operations": "^1.13.1"
     },
     "jest": {
         "moduleFileExtensions": [

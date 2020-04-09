@@ -5,7 +5,7 @@ import { User, UserInput } from '../../generated/graphql.schema'
 import { ApolloClient } from '../../core/decorators/apolloclient.decorator'
 import { fromPromise } from 'apollo-boost'
 
-@Resolver('User')
+@Resolver()
 export class UserResolver {
     @Query()
     async getUser(@Args('id') id: Number, @ApolloClient() client:any): Promise<User> {

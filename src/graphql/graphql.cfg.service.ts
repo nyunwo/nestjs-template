@@ -30,7 +30,8 @@ export class GqlConfigService implements GqlOptionsFactory {
                 });
             },
             debug: true,
-            typePaths: ['./src/modules/**/*.graphql']
+            typePaths: ['./src/**/*.graphql'],
+            
         }
     }
 

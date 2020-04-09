@@ -1,9 +1,3 @@
-schema {
-  query: query_root
-  mutation: mutation_root
-  subscription: subscription_root
-}
-
 input Int_comparison_exp {
   _eq: Int
   _gt: Int

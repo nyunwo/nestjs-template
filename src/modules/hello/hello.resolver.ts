@@ -1,6 +1,6 @@
 import { Resolver, Mutation, Args, Query } from '@nestjs/graphql'
 
-@Resolver('Hello')
+@Resolver()
 export class HelloResolver {
     @Query()
     say(): any {

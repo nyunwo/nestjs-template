@@ -32,14 +32,38 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - data-postgres:/var/lib/postgresql/data/pgdata
+      - ./data/postgres:/var/lib/postgresql/data/pgdata
       #- ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+#   db:
+#     container_name: mysql
+#     image: mysql:8
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: "1234abcg"
+#       MYSQL_DATABASE: "nesttpl"
+#       TZ: Asia/Shanghai
+#     deploy:
+#       restart_policy:
+#         condition: on-failure
+#     command:
+#       --character-set-server=utf8mb4
+#       --collation-server=utf8mb4_general_ci
+#     volumes:
+#       - ./data/mysql:/var/lib/mysql
+#       #- ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+#   phpmyadmin:
+#     container_name: phpmyadmin
+#     image: phpmyadmin/phpmyadmin:latest
+#     ports:
+#       - 8081:80
 
   redis:
     container_name: redis
     image: redis:5-alpine
     volumes:
-      - data-redis:/data
+      - ./data/redis:/data
     ports:
       - "6388:6379"
 
@@ -56,6 +80,6 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: "himyhasura"
 
-volumes:
-  data-postgres:
-  data-redis:
+# volumes:
+#   data-postgres:
+#   data-redis:

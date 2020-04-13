@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '../config/config.module'
 import { ConfigService } from '../config/config.service'
 import { MyGraphQLModule } from '../graphql/graphql.module'
+import { HomeModule } from 'src/modules/home/home.module'
 
 @Module({
     imports: [
         ConfigModule,
-        MyGraphQLModule
+        //MyGraphQLModule, // Graphql功能，需要时启用
+        HomeModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [ConfigService],
 })
+
 export class AppModule { }

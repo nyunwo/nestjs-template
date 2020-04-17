@@ -5,6 +5,7 @@ services:
     container_name: nest-tpl
     environment:
       NODE_ENV: "development"
+      MY_PORT: "1234"
     deploy:
       resources:
        limits:
@@ -13,8 +14,8 @@ services:
        condition: on-failure
     ports:
       - "3002:3002"
-    volumes:
-      - ./:/app
+    # volumes:
+    #   - ./:/app
     depends_on:
       - db
       - redis

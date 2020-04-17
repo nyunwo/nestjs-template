@@ -26,7 +26,7 @@ export class HomeController {
         // console.log(JSON.stringify(users))
 
         
-
+        console.log('my_port', process.env.MY_PORT)
 
         return this.homeService.sayHi()
     }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { UserService } from './user.service'
+import { UserService } from '../user/user.service'
 
 @Injectable()
 export class HomeService {
@@ -7,14 +7,6 @@ export class HomeService {
         private readonly userService: UserService
     ){}
     async sayHi(){
-        // let user = await this.userService.findByUsername('Tom')
-        // console.log('users:', user)
-
-        // let r = await this.userService.addUser('Tom')
-        // console.log('r:', r)
-
-        let r = await this.userService.updatePasswd('Tom', '1243')
-        console.log(r)
         return 'Hello Nest'
     }
 }
